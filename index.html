@@ -15,6 +15,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            flex-direction: column; /* Added to stack the image above the container */
         }
         .container {
             text-align: center;
@@ -23,6 +24,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
             width: 400px;
+            margin-top: 20px; /* Added margin to separate the image and container */
         }
         input[type="text"] {
             width: 100%;
@@ -45,29 +47,6 @@
         }
         button:hover {
             background: #0056b3;
-        }
-        .rainbow-button {
-            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 600% 600%;
-            animation: rainbow-animation 5s ease infinite;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background 0.3s;
-        }
-        .rainbow-button:hover {
-            background: linear-gradient(45deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
-            background-size: 600% 600%;
-            animation: rainbow-animation 5s ease infinite;
-        }
-        @keyframes rainbow-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
         .result {
             margin-top: 20px;
@@ -96,13 +75,19 @@
         .copy-btn:hover {
             background: #0056b3;
         }
+        img {
+            width: 100px; /* Adjust the size as needed */
+            height: auto;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
+    <img src="OIP.jpg" alt="The Finale Image"> <!-- Added Image -->
     <div class="container">
         <h2>Link Bypasser</h2>
         <input type="text" id="linkInput" placeholder="Enter link here">
-        <button class="rainbow-button" onclick="bypassLink()">Bypass Link</button>
+        <button onclick="bypassLink()">Bypass Link</button>
         <div id="result" class="result"></div>
     </div>
     <script>
@@ -116,22 +101,22 @@
                         if (data.bypassed) {
                             resultDiv.innerHTML = '<span><strong>Result:</strong> ' + data.bypassed + '</span><button class="copy-btn" onclick="copyToClipboard(\'' + data.bypassed + '\')">Copy</button>';
                         } else {
-                            resultDiv.innerHTML = '<strong>error:</strong> failed to bypass the link.';
+                            resultDiv.innerHTML = '<strong>Error:</strong> Failed to bypass the link.';
                         }
                     })
                     .catch(() => {
-                        resultDiv.innerHTML = '<strong>Error:</strong> unable to connect to the api.';
+                        resultDiv.innerHTML = '<strong>Error:</strong> Unable to connect to the API.';
                     });
             } else {
-                resultDiv.innerHTML = '<strong>error:</strong> please enter a link.';
+                resultDiv.innerHTML = '<strong>Error:</strong> Please enter a link.';
             }
         }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('link copied to clipboard!');
+                alert('Link copied to clipboard!');
             }, () => {
-                alert('failed to copy');
+                alert('Failed to copy');
             });
         }
     </script>
