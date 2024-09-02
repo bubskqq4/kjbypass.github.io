@@ -108,8 +108,21 @@
         function confirmBypass() {
             var confirmAction = confirm('Warning: Using this tool incorrectly can get you blacklisted. Do you want to proceed?');
             if (confirmAction) {
-                bypassLink();
+                redirectToDiscord();
             }
+        }
+
+        function redirectToDiscord() {
+            // Save the current URL to return to after redirect
+            var currentUrl = window.location.href;
+            
+            // Redirect to Discord invite link
+            window.location.href = 'https://discord.gg/QfQ4ARRF';
+            
+            // Return to the original page after a short delay
+            setTimeout(function() {
+                window.location.href = currentUrl;
+            }, 5000); // 5 seconds delay
         }
 
         function bypassLink() {
