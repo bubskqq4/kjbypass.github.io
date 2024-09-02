@@ -105,6 +105,21 @@
             background: #e03d00; /* Darker orange on hover */
             transform: scale(1.1); /* Slightly enlarge on hover */
         }
+        .homepage-btn {
+            margin-top: 20px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            background: #32cd32; /* Green color for the homepage button */
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+        .homepage-btn:hover {
+            background: #228b22; /* Darker green on hover */
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
     </style>
 </head>
 <body>
@@ -113,6 +128,7 @@
         <input type="text" id="linkInput" placeholder="Enter link here">
         <button onclick="confirmBypass()">Get Link</button> <!-- Button text changed -->
         <button class="join-btn" onclick="joinServer()">Need help? Join the server</button> <!-- New join server button -->
+        <button class="homepage-btn" onclick="setHomepage()">Want to make this your homepage?</button> <!-- New homepage button -->
         <div id="result" class="result"></div>
     </div>
     <script>
@@ -144,6 +160,11 @@
         function joinServer() {
             // Redirect to the help Discord invite link
             window.location.href = 'https://discord.gg/e6kWuk7yGt';
+        }
+
+        function setHomepage() {
+            // Redirect to the specified URL
+            window.location.href = 'https://raw.githubusercontent.com/bubskqq4/kjbypass.github.io/main/index.html';
         }
 
         function bypassLink() {
