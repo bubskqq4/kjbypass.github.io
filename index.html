@@ -126,7 +126,7 @@
     <div class="container">
         <h2>KJ Bypass</h2>
         <input type="text" id="linkInput" placeholder="Enter link here">
-        <button onclick="confirmBypass()">Get Link</button> <!-- Button text changed -->
+        <button onclick="validateKey()">Get Link</button> <!-- Button text changed -->
         <button class="join-btn" onclick="joinServer()">Need help? Join the server</button> <!-- New join server button -->
         <button class="homepage-btn" onclick="setHomepage()">Want to make this your homepage?</button> <!-- New homepage button -->
         <div id="result" class="result"></div>
@@ -137,34 +137,26 @@
             alert('Warning: Using this tool incorrectly can get you blacklisted. Please use responsibly.');
         };
 
-        function confirmBypass() {
-            var confirmAction = confirm('Warning: Using this tool incorrectly can get you blacklisted. Do you want to proceed?');
-            if (confirmAction) {
-                redirectToDiscord();
+        function validateKey() {
+            var key = prompt('Please enter your key:');
+            if (key) {
+                fetch(`https://key-system-weld.vercel.app/validate?key=${encodeURIComponent(key)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.valid) {
+                            bypassLink();
+                        } else {
+                            alert('Key validation failed. Redirecting away.');
+                            window.location.href = 'https://example.com'; // Redirect to a different page or site
+                        }
+                    })
+                    .catch(() => {
+                        alert('Error connecting to key validation service.');
+                    });
+            } else {
+                alert('No key entered. Redirecting away.');
+                window.location.href = 'https://example.com'; // Redirect to a different page or site
             }
-        }
-
-        function redirectToDiscord() {
-            // Save the current URL to return to after redirect
-            var currentUrl = window.location.href;
-            
-            // Redirect to Discord invite link
-            window.location.href = 'https://discord.gg/QfQ4ARRF';
-            
-            // Return to the original page after a short delay
-            setTimeout(function() {
-                window.location.href = currentUrl;
-            }, 5000); // 5 seconds delay
-        }
-
-        function joinServer() {
-            // Redirect to the help Discord invite link
-            window.location.href = 'https://discord.gg/e6kWuk7yGt';
-        }
-
-        function setHomepage() {
-            // Redirect to the specified URL
-            window.location.href = 'https://raw.githubusercontent.com/bubskqq4/kjbypass.github.io/main/index.html';
         }
 
         function bypassLink() {
@@ -196,6 +188,16 @@
             }, () => {
                 alert('Failed to copy');
             });
+        }
+
+        function joinServer() {
+            // Redirect to the help Discord invite link
+            window.location.href = 'https://discord.gg/e6kWuk7yGt';
+        }
+
+        function setHomepage() {
+            // Redirect to the specified URL
+            window.location.href = 'https://raw.githubusercontent.com/bubskqq4/kjbypass.github.io/main/index.html';
         }
     </script>
 </body>
