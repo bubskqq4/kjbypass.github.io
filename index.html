@@ -1,19 +1,41 @@
-  <div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KJ Bypass</title>
+    <style>
+        .container {
+            text-align: center;
+            margin: 20px;
+        }
+        .join-btn, .homepage-btn {
+            margin: 10px;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
         <h2>KJ Bypass</h2>
         <input type="text" id="linkInput" placeholder="Enter link here">
-        <button onclick="confirmBypass()">Get Link</button> <!-- Button text changed -->
-        <button onclick="validateKey()">Get Link</button> <!-- Button text changed -->
-        <button class="join-btn" onclick="joinServer()">Need help? Join the server</button> <!-- New join server button -->
-        <button class="homepage-btn" onclick="setHomepage()">Want to make this your homepage?</button> <!-- New homepage button -->
+        <button onclick="confirmBypass()">Get Link</button>
+        <button onclick="validateKey()">Validate Key</button>
+        <button class="join-btn" onclick="joinServer()">Need help? Join the server</button>
+        <button class="homepage-btn" onclick="setHomepage()">Want to make this your homepage?</button>
         <div id="result" class="result"></div>
-@@ -137,36 +137,28 @@ <h2>KJ Bypass</h2>
-            alert('Warning: Using this tool incorrectly can get you blacklisted. Please use responsibly.');
-        };
-
+    </div>
+    
+    <script>
         function confirmBypass() {
             var confirmAction = confirm('Warning: Using this tool incorrectly can get you blacklisted. Do you want to proceed?');
             if (confirmAction) {
                 redirectToDiscord();
+            }
+        }
+
         function validateKey() {
             var key = prompt('Please enter your key:');
             if (key) {
@@ -62,19 +84,15 @@
         function bypassLink() {
             var link = document.getElementById('linkInput').value;
             var resultDiv = document.getElementById('result');
-@@ -197,6 +189,16 @@ <h2>KJ Bypass</h2>
-                alert('Failed to copy');
-            });
-        }
-
-        function joinServer() {
-            // Redirect to the help Discord invite link
-            window.location.href = 'https://discord.gg/e6kWuk7yGt';
-        }
-
-        function setHomepage() {
-            // Redirect to the specified URL
-            window.location.href = 'https://raw.githubusercontent.com/bubskqq4/kjbypass.github.io/main/index.html';
+            if (link) {
+                navigator.clipboard.writeText(link).then(() => {
+                    resultDiv.textContent = 'Link copied to clipboard!';
+                }).catch(() => {
+                    resultDiv.textContent = 'Failed to copy';
+                });
+            } else {
+                resultDiv.textContent = 'No link provided';
+            }
         }
     </script>
 </body>
