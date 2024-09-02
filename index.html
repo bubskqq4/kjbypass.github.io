@@ -96,10 +96,22 @@
     <div class="container">
         <h2>KJ Bypass</h2>
         <input type="text" id="linkInput" placeholder="Enter link here">
-        <button onclick="bypassLink()">Get Link</button> <!-- Button text changed -->
+        <button onclick="confirmBypass()">Get Link</button> <!-- Button text changed -->
         <div id="result" class="result"></div>
     </div>
     <script>
+        // Show popup warning on page load
+        window.onload = function() {
+            alert('Warning: Using this tool incorrectly can get you blacklisted. Please use responsibly.');
+        };
+
+        function confirmBypass() {
+            var confirmAction = confirm('Warning: Using this tool incorrectly can get you blacklisted. Do you want to proceed?');
+            if (confirmAction) {
+                bypassLink();
+            }
+        }
+
         function bypassLink() {
             var link = document.getElementById('linkInput').value;
             var resultDiv = document.getElementById('result');
@@ -116,16 +128,16 @@
                         }
                     })
                     .catch(() => {
-                        resultDiv.innerHTML = '<strong>Error:</strong> no awaner of our api.';
+                        resultDiv.innerHTML = '<strong>Error:</strong> Unable to connect to the API.';
                     });
             } else {
-                resultDiv.innerHTML = '<strong>Error:</strong> erorr? look like you need to eter a link.';
+                resultDiv.innerHTML = '<strong>Error:</strong> Please enter a link.';
             }
         }
 
         function copyToClipboard(text) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('Link in clipbroad if not try agina');
+                alert('Link copied to clipboard!');
             }, () => {
                 alert('Failed to copy');
             });
